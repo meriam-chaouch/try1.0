@@ -517,7 +517,13 @@ main {
   padding-right: 5rem;
   
 }
-  
+.btn-apply {
+  background-color:skyblue; /* Couleur de fond bleue */
+  color: white; /* Couleur de texte blanche */
+  border-radius: .8rem; /* Supprime la bordure */
+  padding: 0.5rem 0.5rem;/* Ajoute de l'espace autour du texte */
+  cursor: pointer; /* Change le curseur au survol */
+}
 
 .blog-post_cta{
   display: inline-block;
@@ -576,5 +582,14 @@ main {
   .blog-post_date span{
     margin-top: -10rem;
   }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+  .section-title {
+    color: #007bff;
+  }
+
 }
 

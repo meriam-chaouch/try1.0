@@ -43,30 +43,41 @@
         </nav>
     <div class="container main">
         <h2>Sign Up</h2>
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="user_type">User Type:</label>
-                <select class="form-control" id="user_type" name="user_type" required>
-                    <option value="client">Client</option>
-                    <option value="freelancer">Freelancer</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
+<form id="signupForm" method="POST">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+        <label for="user_type">User Type:</label>
+        <select class="form-control" id="user_type" name="user_type" required>
+            <option value="client">Client</option>
+            <option value="freelancer">Freelancer</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary" id="joinButton">Join Freelance</button>
+</form>
     </div>
     
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            var userType = document.getElementById("user_type").value;
+            if (userType === "freelancer") {
+                // Redirection vers la page pour les informations supplémentaires du freelancer
+                window.location.href = "informations_freelancer.html";
+                event.preventDefault(); // Empêcher l'envoi du formulaire par défaut
+            }
+        });
+        </script>
     
     
     <main>
