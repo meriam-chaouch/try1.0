@@ -1,3 +1,11 @@
+<?php
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=client','root','');
+  if(isset($_POST['forminscription']))
+ {
+     echo"ok";
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -53,8 +61,8 @@
         <input type="email" class="form-control" id="email" name="email" required>
     </div>
     <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <label for="password1">Password:</label>
+        <input type="password1" class="form-control" id="password1" name="password1" required>
     </div>
     <div class="form-group">
         <label for="user_type">User Type:</label>
@@ -64,6 +72,20 @@
         </select>
     </div>
     <button type="submit" class="btn btn-primary" id="joinButton">Join Freelance</button>
+    <?php
+        try {
+            $pseudo = $_POST['name'];
+            $email = $_POST['email'];
+            $password1 = $_POST['password1'];
+            $user_type = $_POST['user_type'];
+    
+            $insertmbr = $bdd->prepare("INSERT INTO client(pseudo,email,password1,user_type) VALUES(?,?,?,?)");
+            $insertmbr->execute(array($pseudo,$email,$password1,$user_type ));
+            $_SESSION['comptecree'] = "votre compte a bien ete cree !";
+            header('location: index.html');
+        } catch(PDOException $e) {
+        }
+    ?>
 </form>
     </div>
     
