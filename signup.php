@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     
 
-    <script>
+  <!--  <script>
         document.getElementById("signupForm").addEventListener("submit", function(event) {
             var userType = document.getElementById("user_type").value;
             if (userType === "freelancer") {
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 event.preventDefault(); // Empêcher l'envoi du formulaire par défaut
             }
         });
-        </script>
+        </script>-->
     
     
     <main>

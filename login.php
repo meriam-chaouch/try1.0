@@ -1,3 +1,39 @@
+<?php
+session_start(); // Démarrer la session
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=client','root','');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        if (isset($_POST['email'], $_POST['password'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+
+            // Requête pour vérifier les informations de connexion
+            $query = $bdd->prepare("SELECT * FROM client WHERE email = ? AND password1 = ?");
+            $query->execute(array($email, $password)); // Utilisation de $password au lieu de $password1
+            $user = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                // Utilisateur trouvé, enregistrer les informations de connexion dans la session
+                $_SESSION['user_id'] = $user['id']; // Supposons que la colonne de l'ID de l'utilisateur soit 'id'
+                $_SESSION['user_email'] = $user['email'];
+                $_SESSION['user_type'] = $user['user_type'];
+
+                // Rediriger l'utilisateur vers une page appropriée après la connexion réussie
+                header('Location: profil .html'); // Remplacer "profile.php" par la page de profil appropriée
+                exit; // Arrêter l'exécution du script après la redirection
+            } else {
+                // Informer l'utilisateur que les informations de connexion sont incorrectes
+                echo "Email or password incorrect.";
+            }
+        } else {
+            echo "One or more POST parameters are missing.";
+        }
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +93,6 @@
             </form>
         </div>
     </main>
-
     <footer class="footer-distributed">
         <div class="footer-left">
             <a href="index.html">
