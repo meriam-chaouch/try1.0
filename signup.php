@@ -73,18 +73,36 @@ $bdd = new PDO('mysql:host=127.0.0.1;dbname=client','root','');
     </div>
     <button type="submit" class="btn btn-primary" id="joinButton">Join Freelance</button>
     <?php
-        try {
+    
+
+
+
+// Retrieving types from the database
+
+
+
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    try {
+        if (isset($_POST['name'], $_POST['email'], $_POST['password1'], $_POST['user_type'])) {
             $pseudo = $_POST['name'];
             $email = $_POST['email'];
             $password1 = $_POST['password1'];
             $user_type = $_POST['user_type'];
-    
+
             $insertmbr = $bdd->prepare("INSERT INTO client(pseudo,email,password1,user_type) VALUES(?,?,?,?)");
-            $insertmbr->execute(array($pseudo,$email,$password1,$user_type ));
-            $_SESSION['comptecree'] = "votre compte a bien ete cree !";
-            header('location: index.html');
-        } catch(PDOException $e) {
+            $insertmbr->execute(array($pseudo,$email,$password1,$user_type));
+            $_SESSION['comptecree'] = "Votre compte a bien été créé !";
+            header('Location: index.html');
+            exit; // Ensure script stops execution after redirect
+        } else {
+            echo "One or more POST parameters are missing.";
         }
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
     ?>
 </form>
     </div>
